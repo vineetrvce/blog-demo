@@ -3,8 +3,8 @@
 #### Required Tools
 Download and install the following tools:
 
-[IntelliJ Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
-[MySQL](https://dev.mysql.com/downloads/installer/)
+[IntelliJ Community Edition](https://www.jetbrains.com/idea/download/#section=windows) 
+[MySQL](https://dev.mysql.com/downloads/installer/) 
 *Note:* Install the JDBC connector during the MySQL installation
 
 #### Setting up MySQL database

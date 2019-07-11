@@ -68,7 +68,7 @@ public class serviceBlogTest {
     }
 
     @Test
-    public void fetchBlog_ExistingDatainDB_ShouldReturnBlogList() throws Exception {
+    public void fetchBlog_ExistingDatainDB_ShouldReturnBlog() throws Exception {
         Blog _blog = new Blog(1, "Blog Header 1","Blog Text 1");
 
         BDDMockito.given(oMySQLDaoBlog.selectBlog(1)).willReturn(_blog);
@@ -92,8 +92,7 @@ public class serviceBlogTest {
     }
 
     @Test
-    public void updateBlog_ExistingDatainDB_ShouldReturnError() throws Exception {
-        Blog _blog = new Blog(1, "Blog Header 1","Blog Text 1");
+    public void updateBlog_NoDatainDB_ShouldReturnError() throws Exception {
         Blog _updatedblog = new Blog(1, "Blog Header 1 updated","Blog Text 1 updated");
 
         BDDMockito.given(oMySQLDaoBlog.selectBlog(1)).willReturn(null);
@@ -101,13 +100,12 @@ public class serviceBlogTest {
         exceptionRule.expect(NotFoundException.class);
         exceptionRule.expectMessage("Blog 1 not found");
 
-        assert(oServiceBlog.updateBlog(_updatedblog) != 0);
+        oServiceBlog.updateBlog(_updatedblog);
     }
 
     @Test
     public void removeBlog_ExistingDatainDB_ShouldReturnNonZero() throws Exception {
         Blog _blog = new Blog(1, "Blog Header 1","Blog Text 1");
-        Blog _updatedblog = new Blog(1, "Blog Header 1 updated","Blog Text 1 updated");
 
         BDDMockito.given(oMySQLDaoBlog.selectBlog(1)).willReturn(_blog);
         BDDMockito.given(oMySQLDaoBlog.deleteBlog(1)).willReturn(1);
@@ -117,15 +115,13 @@ public class serviceBlogTest {
 
     @Test
     public void removeBlog_NoDatainDB_ShouldReturnError() throws Exception {
-        Blog _blog = new Blog(1, "Blog Header 1","Blog Text 1");
-        Blog _updatedblog = new Blog(1, "Blog Header 1 updated","Blog Text 1 updated");
 
         BDDMockito.given(oMySQLDaoBlog.selectBlog(1)).willReturn(null);
 
         exceptionRule.expect(NotFoundException.class);
         exceptionRule.expectMessage("Blog 1 not found");
 
-        assert(oServiceBlog.removeBlog(1) != 0);
+        oServiceBlog.removeBlog(1);
     }
 
     @Test
